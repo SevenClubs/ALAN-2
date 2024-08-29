@@ -24,24 +24,63 @@ double exp_Taylor2(double x, int N)
 
 int main()
 {
-	std::cout << "\nEhi, mi daresti la x e la N, bellezza? ;)\n";
-	double x;
-	int N;
-	std::cin >> x >> N;
-	
-	double r0 = exp(x);
-	double r1 = exp_Taylor(x, N);
-	double r2 = exp_Taylor2(x, N);
-	
-	std::cout << "\nRisultati esperimento:\nr0 = " << r0 << "\nr1 = " << r1 << "\nr2 = " << r2;
-	
-	double abs_err1 = abs(r0 - r1);
-	double rel_err1 = abs_err1 / r0;
-	
-	double abs_err2 = abs(r0 - r2);
-	double rel_err2 = abs_err2 / r0;
-	
-	std::cout << "\n\n - Errori sul primo algoritmo:\n\nErrore assoluto = " << abs_err1 << "\nErrore relativo = " << rel_err1 * 100 << "%";
-	std::cout << "\n\n - Errori sul secondo algoritmo:\n\nErrore assoluto = " << abs_err2 << "\nErrore relativo = " << rel_err2 * 100 << "%\n\n---------------------------\n\n";
+	double x_val[2] = {0.5, 30};
+	int N_val[5] = {3, 10, 50, 100, 150}; 
+	for (int i = 0; i < 2; ++i)
+	{
+		double x = x_val[i];
+		for (int j = 0; j < 5; ++j)
+		{	
+			int N = N_val[j];
+			
+			double expected_res = exp(x);
+			double res = exp_Taylor(x, N);
+			
+			std::cout << "\nRisultati esperimento(x = " << x << ", N = " << N << "):\n\nValore atteso = " << expected_res << "\nValore calcolato = " << res;
+			
+			double abs_err = abs(expected_res - res);
+			double rel_err = abs_err / expected_res;
+			
+			std::cout << "\n\n - Errori sull'algoritmo:\n\nErrore assoluto = " << abs_err << "\nErrore relativo = " << rel_err << "\n\n---------------------------\n\n";
+		}
+	}
+	for (int i = 0; i < 2; ++i)
+	{
+		double x = -x_val[i];
+		for (int j = 0; j < 5; ++j)
+		{	
+			int N = N_val[j];
+			
+			double expected_res = exp(x);
+			double res = exp_Taylor(x, N);
+			
+			std::cout << "\nRisultati esperimento(x = " << x << ", N = " << N << ", algoritmo 1):\n\nValore atteso = " << expected_res 
+				<< "\nValore calcolato = " << res;
+			
+			double abs_err = abs(expected_res - res);
+			double rel_err = abs_err / expected_res;
+			
+			std::cout << "\n\n - Errori sull'algoritmo 1:\n\nErrore assoluto = " << abs_err << "\nErrore relativo = " << rel_err << "\n\n---------------------------\n\n";
+		}
+	}
 
+	for (int i = 0; i < 2; ++i)
+	{
+		double x = -x_val[i];
+		for (int j = 0; j < 5; ++j)
+		{	
+			int N = N_val[j];
+			
+			double expected_res = exp(x);
+			double res = exp_Taylor2(x, N);
+			
+			std::cout << "\nRisultati esperimento(x = " << x << ", N = " << N << ", algoritmo 2):\n\nValore atteso = " << expected_res 
+				<< "\nValore calcolato = " << res;
+			
+			double abs_err = abs(expected_res - res);
+			double rel_err = abs_err / expected_res;
+			
+			std::cout << "\n\n - Errori sull'algoritmo 2:\n\nErrore assoluto = " << abs_err << "\nErrore relativo = " << rel_err << "\n\n---------------------------\n\n";
+		}
+	}
 }
