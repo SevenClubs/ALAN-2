@@ -24,24 +24,25 @@ float infiniteNorm (Matrix m)
 
 int main() {
     Matrix A1 = genMatrix1();
-    cout << "Matrice A_1:\n"; 
+    cout << "\nMatrice A1:\n"; 
     printMatrix(A1);
-    cout << "\nNorma infinito matrice A_1 = " << infiniteNorm(A1) << "\n\n";
-
+    
     Matrix A2 = genMatrix2();
-    cout << "Matrice A_2:\n";
+    cout << "\nMatrice A2:\n";
     printMatrix(A2);
-    cout << "\nNorma infinito matrice A_2 = " << infiniteNorm(A2) << "\n\n";
-
+    
     Matrix A3 = genMatrix3();
-    cout << "Matrice A_3:\n";
+    cout << "\nMatrice A3:\n";
     printMatrix(A3);
-    cout << "\nNorma infinito matrice A_3 = " << infiniteNorm(A3) << "\n\n";
-
+    
     Matrix A4 = genMatrix4();
-    cout << "Matrice A_4:\n";
+    cout << "\nMatrice A4:\n";
     printMatrix(A4);
-    cout << "\nNorma infinito matrice A_4 = " << infiniteNorm(A4) << "\n\n";
+
+    cout << "\nNorma infinito matrice A1 = " << infiniteNorm(A1) << "\n";
+    cout << "\nNorma infinito matrice A2 = " << infiniteNorm(A2) << "\n"; 
+    cout << "\nNorma infinito matrice A3 = " << infiniteNorm(A3) << "\n"; 
+    cout << "\nNorma infinito matrice A4 = " << infiniteNorm(A4) << "\n\n";
 
     return 0;
 }
