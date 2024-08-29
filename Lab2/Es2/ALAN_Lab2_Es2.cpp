@@ -5,6 +5,24 @@
 using namespace std;
 
 
+
+// Computes infinity matrix norm
+float infiniteNorm (Matrix m)
+{
+    float max = 0;
+    for (unsigned i = 0; i < m.rows; ++i) 
+    {
+        float sum = 0;
+        for (unsigned j = 0; j < m.columns; ++j)
+            sum += abs(m.values[i][j]);
+        if (sum > max)
+            max = sum;
+    }
+    return max;
+}
+
+
+
 // Returns true if float value is approximately 0
 bool isZero(float x)
 {
@@ -121,7 +139,7 @@ void GaussMethod(const Matrix& A, const Matrix& b, Matrix& x, int& status)
     }
     //cout << "\n" << "N_pivot = " << n_pivot << "\n";
     cout << "\n";
-    printMatrix(Ab);
+    // printMatrix(Ab);
 
     if (n_pivot > Ab.rows)
     {
@@ -198,6 +216,8 @@ void GaussMethodPart(const Matrix& A, const Matrix& b, Matrix& x, int& status)
                         Ab.values[j][k] = temp;
                     }
                     notNullColumn = true;
+                    // printMatrix(Ab);
+                    // cout << "\n";
                 }
             }
         }
@@ -218,6 +238,8 @@ void GaussMethodPart(const Matrix& A, const Matrix& b, Matrix& x, int& status)
                     Ab.values[i][j] = Ab.values[pivot][j];
                     Ab.values[pivot][j] = temp;
                 }
+                // printMatrix(Ab);
+                // cout << "\n";
             }
 
             // Gauss method
@@ -227,6 +249,8 @@ void GaussMethodPart(const Matrix& A, const Matrix& b, Matrix& x, int& status)
                 for (unsigned k = i; k < Ab.columns; ++k)
                 {
                 Ab.values[j][k] += m * Ab.values[i][k];
+                // printMatrix(Ab);
+                // cout << "\n";
                 }
             }
         // printMatrix(Ab);
@@ -237,7 +261,7 @@ void GaussMethodPart(const Matrix& A, const Matrix& b, Matrix& x, int& status)
         }
     }
     cout << "\n";
-    printMatrix(Ab);
+    // printMatrix(Ab);
 
     if (n_pivot > Ab.rows)
     {
@@ -321,6 +345,8 @@ int main() {
         cout << "\nWrong result\n";
         return 1;
     }
+    cout << "\nError on solution without partial pivoting = " << infiniteNorm(x1) - 1
+        << "\nError on solution with partial pivoting = " << infiniteNorm(x1_bis) - 1 << "\n";
 
 
 
@@ -351,6 +377,8 @@ int main() {
         cout << "\nWrong result\n";
         return 1;
     }
+    cout << "\nError on solution without partial pivoting = " << infiniteNorm(x2) - 1
+        << "\nError on solution with partial pivoting = " << infiniteNorm(x2_bis) - 1 << "\n";
 
 
 
@@ -381,7 +409,8 @@ int main() {
         cout << "\nWrong result\n";
         return 1;
     }
-
+    cout << "\nError on solution without partial pivoting = " << infiniteNorm(x3) - 1
+        << "\nError on solution with partial pivoting = " << infiniteNorm(x3_bis) - 1 << "\n";
 
 
     Matrix A4 = genMatrix4();
@@ -411,6 +440,8 @@ int main() {
         cout << "\nWrong result\n";
         return 1;
     }
+    cout << "\nError on solution without partial pivoting = " << infiniteNorm(x4) - 1
+        << "\nError on solution with partial pivoting = " << infiniteNorm(x4_bis) - 1 << "\n";
 
     cout << "\n";
     return 0;
