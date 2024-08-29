@@ -4,34 +4,29 @@
 int main()
 {
 	long int d = 0;
-	long int o = 0;
-	
-	{
-		double one = 1;
-		double lollo = pow(2, 0);
-		while (one + lollo > one)
-		{
-			++o;
-			std::cout << lollo << "\n";
-			lollo = pow(2, -o);
-			if (o > 100)
-				return 0;
-		}
-	}
+	long int f = 0;
 	
 	{
 		float one = 1;
-		float lollo = pow(2, 0);
-		while (one + lollo > one)
+		float power_two = pow(2, 0);
+		while (one + power_two > one)
 		{
-			++d;
-			std::cout << d << "\n";
-			lollo = pow(2, -d);
+			++f;
+			power_two = pow(2, -f);
 		}
+		--f;
+		std::cout << "\nf = " << f << "\neps = " << pow(2, -f) << "\n\n";
 	}
 	
-	--d;
-	--o;
-	
-	std::cout << "d = " << d << ", o = " << o << "\n";
+	{
+		double one = 1;
+		double power_two = pow(2, 0);
+		while (one + power_two > one)
+		{
+			++d;
+			power_two = pow(2, -d);
+		}
+		--d;
+		std::cout << "d = " << d << "\neps = " << pow(2, -d) << "\n\n";
+	}
 }
