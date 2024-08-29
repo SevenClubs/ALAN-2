@@ -25,7 +25,7 @@ float infiniteNorm (Matrix m)
 // Returns true if float value is approximately 0
 bool isZero(float x)
 {
-    return (abs(x) < pow(10, -10));
+    return (abs(x) < pow(10, -6));
 }
 
 
@@ -328,26 +328,6 @@ int main() {
     int status;
     
     Matrix A1 = genMatrix1();
-    Matrix A1_inv = inverseMatrix(A1, status);
-    if (status == 0)
-    {
-        cout << "\nInverse matrix of A1:\n";
-        printMatrix(A1_inv);
-        float det = determinant(A1, status);
-        float det_inv = determinant(A1_inv, status);
-        cout << "\ndet(A1) = " << det << ", det(A1_inv) = " << det_inv << "\n";
-        cout << "det(A1) * det(A1_inv) = " << det * det_inv << "\n";
-        cout << "\nMatrix product:\n";
-        Matrix prod = matrixProduct(A1, A1_inv, status);
-        printMatrix(prod);
-        deleteMatrix(prod);
-        cout << "\nMaximum condition number of A1 = " << infiniteNorm(A1) * infiniteNorm(A1_inv) << "\n";
-    }
-    else
-    {
-        cout << "\nCould not compute inverse of A1\nStatus = " << status << "\n";
-        return 1;
-    }
     Matrix b1 = calcConstantMatrix(A1);
     cout << "\nVector b1:\n";
     printMatrix(b1);
@@ -382,30 +362,32 @@ int main() {
     float out_pert = abs(infiniteNorm(pert_x1) - infiniteNorm(x1)) / infiniteNorm(x1);
     cout << "\nInput perturbance = " << in_pert << "\nOutput perturbance = " << out_pert;
     cout << "\nEmpirical condition number = " << out_pert / in_pert << "\n";
+    Matrix A1_inv = inverseMatrix(A1, status);
+    if (status == 0)
+    {
+        /*
+        cout << "\nInverse matrix of A1:\n";
+        printMatrix(A1_inv);
+        float det = determinant(A1, status);
+        float det_inv = determinant(A1_inv, status);
+        cout << "\ndet(A1) = " << det << ", det(A1_inv) = " << det_inv << "\n";
+        cout << "det(A1) * det(A1_inv) = " << det * det_inv << "\n";
+        cout << "\nMatrix product:\n";
+        Matrix prod = matrixProduct(A1, A1_inv, status);
+        printMatrix(prod);
+        deleteMatrix(prod);
+        */
+        cout << "\nMaximum condition number of A1 = " << infiniteNorm(A1) * infiniteNorm(A1_inv) << "\n";
+    }
+    else
+    {
+        cout << "\nCould not compute inverse of A1\nStatus = " << status << "\n";
+        return 1;
+    }
 
 
 
     Matrix A2 = genMatrix2();
-    Matrix A2_inv = inverseMatrix(A2, status);
-    if (status == 0)
-    {
-        cout << "\nInverse matrix of A2:\n";
-        printMatrix(A2_inv);
-        float det = determinant(A2, status);
-        float det_inv = determinant(A2_inv, status);
-        cout << "\ndet(A2) = " << det << ", det(A2_inv) = " << det_inv << "\n";
-        cout << "det(A2) * det(A2_inv) = " << det * det_inv << "\n";
-        cout << "\nMatrix product:\n";
-        Matrix prod = matrixProduct(A2, A2_inv, status);
-        printMatrix(prod);
-        deleteMatrix(prod);
-        cout << "\nMaximum condition number of A2 = " << infiniteNorm(A1) * infiniteNorm(A1_inv) << "\n";
-    }
-    else
-    {
-        cout << "\nCould not compute inverse of A2\nStatus = " << status << "\n";
-        return 1;
-    }
     Matrix b2 = calcConstantMatrix(A2);
     cout << "\nVector b2:\n";
     printMatrix(b2);
@@ -440,30 +422,32 @@ int main() {
     out_pert = abs(infiniteNorm(pert_x2) - infiniteNorm(x2)) / infiniteNorm(x2);
     cout << "\nInput perturbance = " << in_pert << "\nOutput perturbance = " << out_pert;
     cout << "\nEmpirical condition number = " << out_pert / in_pert << "\n";
-    
-
-
-    Matrix A3 = genMatrix3();
-    Matrix A3_inv = inverseMatrix(A3, status);
+    Matrix A2_inv = inverseMatrix(A2, status);
     if (status == 0)
     {
-        cout << "\nInverse matrix of A3:\n";
-        printMatrix(A3_inv);
-        float det = determinant(A3, status);
-        float det_inv = determinant(A3_inv, status);
-        cout << "\ndet(A3) = " << det << ", det(A3_inv) = " << det_inv << "\n";
-        cout << "det(A3) * det(A3_inv) = " << det * det_inv << "\n";
+        /*
+        cout << "\nInverse matrix of A2:\n";
+        printMatrix(A2_inv);
+        float det = determinant(A2, status);
+        float det_inv = determinant(A2_inv, status);
+        cout << "\ndet(A2) = " << det << ", det(A2_inv) = " << det_inv << "\n";
+        cout << "det(A2) * det(A2_inv) = " << det * det_inv << "\n";
         cout << "\nMatrix product:\n";
-        Matrix prod = matrixProduct(A3, A3_inv, status);
+        Matrix prod = matrixProduct(A2, A2_inv, status);
         printMatrix(prod);
         deleteMatrix(prod);
-        cout << "\nMaximum condition number of A3 = " << infiniteNorm(A3) * infiniteNorm(A3_inv) << "\n";
+        */
+        cout << "\nMaximum condition number of A2 = " << infiniteNorm(A2) * infiniteNorm(A2_inv) << "\n";
     }
     else
     {
-        cout << "\nCould not compute inverse of A3\nStatus = " << status << "\n";
+        cout << "\nCould not compute inverse of A2\nStatus = " << status << "\n";
         return 1;
     }
+
+
+
+    Matrix A3 = genMatrix3();
     Matrix b3 = calcConstantMatrix(A3);
     cout << "\nVector b3:\n";
     printMatrix(b3);
@@ -498,30 +482,32 @@ int main() {
     out_pert = abs(infiniteNorm(pert_x3) - infiniteNorm(x3)) / infiniteNorm(x3);
     cout << "\nInput perturbance = " << in_pert << "\nOutput perturbance = " << out_pert;
     cout << "\nEmpirical condition number = " << out_pert / in_pert << "\n";
-    
-
-
-    Matrix A4 = genMatrix4();
-    Matrix A4_inv = inverseMatrix(A4, status);
+    Matrix A3_inv = inverseMatrix(A3, status);
     if (status == 0)
     {
-        cout << "\nInverse matrix of A4:\n";
-        printMatrix(A4_inv);
-        float det = determinant(A4, status);
-        float det_inv = determinant(A4_inv, status);
-        cout << "\ndet(A4) = " << det << ", det(A4_inv) = " << det_inv << "\n";
-        cout << "det(A4) * det(A4_inv) = " << det * det_inv << "\n";
+        /*
+        cout << "\nInverse matrix of A3:\n";
+        printMatrix(A3_inv);
+        float det = determinant(A3, status);
+        float det_inv = determinant(A3_inv, status);
+        cout << "\ndet(A3) = " << det << ", det(A3_inv) = " << det_inv << "\n";
+        cout << "det(A3) * det(A3_inv) = " << det * det_inv << "\n";
         cout << "\nMatrix product:\n";
-        Matrix prod = matrixProduct(A4, A4_inv, status);
+        Matrix prod = matrixProduct(A3, A3_inv, status);
         printMatrix(prod);
         deleteMatrix(prod);
-        cout << "\nMaximum condition number of A4 = " << infiniteNorm(A4) * infiniteNorm(A4_inv) << "\n";
+        */
+        cout << "\nMaximum condition number of A3 = " << infiniteNorm(A3) * infiniteNorm(A3_inv) << "\n";
     }
     else
     {
-        cout << "\nCould not compute inverse of A4\nStatus = " << status << "\n";
+        cout << "\nCould not compute inverse of A3\nStatus = " << status << "\n";
         return 1;
     }
+
+
+
+    Matrix A4 = genMatrix4();
     Matrix b4 = calcConstantMatrix(A4);
     cout << "\nVector b4:\n";
     printMatrix(b4);
@@ -556,7 +542,30 @@ int main() {
     out_pert = abs(infiniteNorm(pert_x4) - infiniteNorm(x4)) / infiniteNorm(x4);
     cout << "\nInput perturbance = " << in_pert << "\nOutput perturbance = " << out_pert;
     cout << "\nEmpirical condition number = " << out_pert / in_pert << "\n";
-    
+    Matrix A4_inv = inverseMatrix(A4, status);
+    if (status == 0)
+    {
+        /*
+        cout << "\nInverse matrix of A4:\n";
+        printMatrix(A4_inv);
+        float det = determinant(A4, status);
+        float det_inv = determinant(A4_inv, status);
+        cout << "\ndet(A4) = " << det << ", det(A4_inv) = " << det_inv << "\n";
+        cout << "det(A4) * det(A4_inv) = " << det * det_inv << "\n";
+        cout << "\nMatrix product:\n";
+        Matrix prod = matrixProduct(A4, A4_inv, status);
+        printMatrix(prod);
+        deleteMatrix(prod);
+        */
+        cout << "\nMaximum condition number of A4 = " << infiniteNorm(A4) * infiniteNorm(A4_inv) << "\n";
+    }
+    else
+    {
+        cout << "\nCould not compute inverse of A4\nStatus = " << status << "\n";
+        return 1;
+    }
 
+
+    cout << "\n";
     return 0;
 }
